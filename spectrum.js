@@ -509,22 +509,24 @@
         }
 
         function addColorToSelectionPalette(color) {
-            if (showSelectionPalette) {
-                var rgb = tinycolor(color).toRgbString();
-                if (!paletteLookup[rgb] && $.inArray(rgb, selectionPalette) === -1) {
-                    selectionPalette.push(rgb);
-                    while(selectionPalette.length > maxSelectionSize) {
-                        selectionPalette.shift();
-                    }
-                }
-
-                if (localStorageKey && window.localStorage) {
-                    try {
-                        window.localStorage[localStorageKey] = selectionPalette.join(";");
-                    }
-                    catch(e) { }
+            if(isDragging) return;
+            if(!showSelectionPalette) return;
+            
+            var rgb = tinycolor(color).toRgbString();
+            if (!paletteLookup[rgb] && $.inArray(rgb, selectionPalette) === -1) {
+                selectionPalette.push(rgb);
+                while(selectionPalette.length > maxSelectionSize) {
+                    selectionPalette.shift();
                 }
             }
+
+            if (localStorageKey && window.localStorage) {
+                try {
+                    window.localStorage[localStorageKey] = selectionPalette.join(";");
+                }
+                catch(e) { }
+            }
+            
         }
 
         function getUniqueSelectionPalette() {
