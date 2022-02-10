@@ -876,8 +876,10 @@
 
             if (color) {
                 displayColor = color.toString(currentPreferredFormat);
-                // Update the selection palette with the current color
-                addColorToSelectionPalette(color);
+                if(hasChanged){
+                    // Update the selection palette with the current color
+                    addColorToSelectionPalette(color);
+                }
             }
 
             if (isInput) {
